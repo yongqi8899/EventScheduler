@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
 import API_BASE_URL from "../api";
-
+// test@gmail.com 11111111
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,11 +21,11 @@ export default function Login() {
         }),
       });
       const data = await res.json();
-    
+
       if (!res.ok) {
         setError(data.error || "Login failed");
-        console.log("Login failed",data);
-      }else{
+        console.log("Login failed", data);
+      } else {
         const { token } = data;
         localStorage.setItem("token", token);
       }
@@ -35,6 +34,7 @@ export default function Login() {
       setError(error.message);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -43,9 +43,10 @@ export default function Login() {
         navigate("/events");
       }
     } catch (error) {
-      setError(error);
+      setError(error.message);
     }
   };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -76,9 +77,9 @@ export default function Login() {
       />
       <p className="text-red-400">{error}</p>
       <div className="flex justify-between">
-        <button type="submit">login</button>
+        <button type="submit">Login</button>
         <p>
-          no account?{" "}
+          No account?{" "}
           <Link to="/register" className="text-red-400">
             Register
           </Link>
