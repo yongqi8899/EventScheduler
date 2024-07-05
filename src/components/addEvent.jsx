@@ -63,7 +63,6 @@ const AddEvent = () => {
     addEventProcess(form).then(() => {
       close();
       reset();
-      //   window.location.reload();
       navigate("/events");
     });
   };
