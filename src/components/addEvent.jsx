@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import API_BASE_URL from "../api";
 const AddEvent = () => {
   const [error, setError] = useState(null);
-//   const [organzierId, setOrganzierId] = useState('');
-const refDialog = useRef(null);
+  const navigate = useNavigate();
+  const refDialog = useRef(null);
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -40,9 +41,9 @@ const refDialog = useRef(null);
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({...form, organizerId:Number(organizerId)}),
+        body: JSON.stringify({ ...form, organizerId: Number(organizerId) }),
       });
       console.log(res);
       const data = await res.json();
@@ -62,15 +63,13 @@ const refDialog = useRef(null);
     addEventProcess(form).then(() => {
       close();
       reset();
-      window.location.reload();
+      //   window.location.reload();
+      navigate("/events");
     });
   };
   return (
     <>
-      <button
-        className="z-50 text-gray-300 btn btn-outline"
-        onClick={show}
-      >
+      <button className="z-50 text-gray-300 btn btn-outline" onClick={show}>
         +
       </button>
       <dialog id="my_modal_1" className="modal" ref={refDialog}>
