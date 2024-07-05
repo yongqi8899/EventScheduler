@@ -21,20 +21,20 @@ export default function Login() {
         }),
       });
       const data = await res.json();
-
       if (!res.ok) {
         setError(data.error || "Login failed");
         console.log("Login failed", data);
       } else {
-        const { token } = data;
+        const { token, organizerId } = data;
         localStorage.setItem("token", token);
+        localStorage.setItem("organizerId", data.user.id);
+        console.log("Login success", data);
       }
       return data;
     } catch (error) {
       setError(error.message);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
