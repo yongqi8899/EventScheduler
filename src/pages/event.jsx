@@ -21,9 +21,9 @@ export default function Event() {
       </div>
       {eventsData.map((el) => (
         <div className="my-6 shadow-xl card card-side bg-base-100" key={el.id}>
-          <div className="bg-blue-300 ">{el.date}</div>
           <div className="card-body">
             <h2 className="card-title">{el.title}</h2>
+            <p>{el.date}</p>
             <p>{el.location}</p>
             <Link key={el.id} to={`/events/${el.id}`} className="btn">
               <button className="mr-6 btn btn-outline btn-bordered">detail</button>

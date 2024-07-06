@@ -5,6 +5,29 @@ export async function eventDetailLoader({ params }) {
   return fetch(`${API_BASE_URL}/api/events/${params.id}`);
 }
 
+const EditEventProcess = async (form) => {
+  try {
+    const token = localStorage.getItem("token");
+    const res = await fetch(`${API_BASE_URL}/api/events/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(form),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.error || "Edit Event failed");
+      alert("Edit Event failed", error);
+    }
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 function handleEdit(id) {}
 const handleDelete = async (id) => {
   try {
